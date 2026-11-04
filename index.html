@@ -24,6 +24,8 @@
       border-radius: 12px 12px 0 0;
       border-bottom: 4px solid #e08a1e;
     }
+    header { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; }
+    .logo { display: block; flex: none; width: 107px; height: 87px; padding: 0.4rem; box-sizing: content-box; background: #fff; border-radius: 8px; }
     h1 { margin: 0; font-size: 2rem; }
     header p { margin: 0.25rem 0 0; color: #d5e1ec; }
     main {
@@ -86,8 +88,11 @@
 <body>
   <div class="page">
     <header>
-      <h1>Inox Metal SSR</h1>
-      <p>Inox Metal SSR s.r.l.</p>
+      <img class="logo" src="logo.png" alt="SSR Inox Metal Logo" width="107" height="87">
+      <div>
+        <h1>Inox Metal SSR</h1>
+        <p>Inox Metal SSR s.r.l.</p>
+      </div>
     </header>
 
     <main>
