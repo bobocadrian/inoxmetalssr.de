@@ -32,6 +32,34 @@
       border-radius: 0 0 12px 12px;
       box-shadow: 0 8px 24px rgba(27, 58, 87, 0.2);
     }
+    .notice {
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      font-weight: 600;
+      color: #6b3f06;
+      background: #fdf0dc;
+      border: 1px solid #e08a1e;
+      border-radius: 8px;
+    }
+    .notice p { margin: 0; }
+    [hidden] { display: none; }
+    .countdown { display: flex; justify-content: center; gap: 0.5rem; margin-top: 0.6rem; }
+    .countdown div {
+      min-width: 4rem;
+      padding: 0.35rem 0.25rem;
+      font-size: 0.75rem;
+      font-weight: 400;
+      background: #fff;
+      border: 1px solid #e08a1e;
+      border-radius: 6px;
+    }
+    .countdown b {
+      display: block;
+      font-size: 1.4rem;
+      line-height: 1.2;
+      font-variant-numeric: tabular-nums;
+    }
     h2 { margin: 0 0 0.5rem; font-size: 1.1rem; color: #1b3a57; }
     p { margin: 0.4rem 0; }
     a { color: #1f5f96; }
@@ -63,6 +91,16 @@
     </header>
 
     <main>
+      <div class="notice">
+        <p>Diese Website befindet sich im Aufbau.</p>
+        <div id="countdown" class="countdown" hidden>
+          <div><b id="cd-days">0</b>Tage</div>
+          <div><b id="cd-hours">00</b>Stunden</div>
+          <div><b id="cd-minutes">00</b>Minuten</div>
+          <div><b id="cd-seconds">00</b>Sekunden</div>
+        </div>
+      </div>
+
       <section class="card">
         <h2>Kontakt</h2>
         <p>Str. Căprioarei, nr. 9<br>Ghiroda, Timiș, Rumänien</p>
@@ -91,5 +129,30 @@
       </footer>
     </main>
   </div>
+
+  <script>
+    // Fixed end date, so every visitor sees the same countdown.
+    const end = new Date('2026-11-12T00:00:00+01:00').getTime();
+    const box = document.getElementById('countdown');
+    const set = (id, value) => { document.getElementById(id).textContent = value; };
+    const pad = (n) => String(n).padStart(2, '0');
+
+    function tick() {
+      const left = Math.floor((end - Date.now()) / 1000);
+      if (left <= 0) {
+        box.hidden = true;
+        clearInterval(timer);
+        return;
+      }
+      box.hidden = false;
+      set('cd-days', Math.floor(left / 86400));
+      set('cd-hours', pad(Math.floor(left / 3600) % 24));
+      set('cd-minutes', pad(Math.floor(left / 60) % 60));
+      set('cd-seconds', pad(left % 60));
+    }
+
+    const timer = setInterval(tick, 1000);
+    tick();
+  </script>
 </body>
 </html>
