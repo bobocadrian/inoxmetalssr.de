@@ -5,159 +5,213 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Inox Metal SSR – Kontakt</title>
   <meta name="description" content="Kontaktdaten der Inox Metal SSR s.r.l., Ghiroda, Timiș, Rumänien.">
+  <meta name="theme-color" content="#0c1c5c">
   <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      padding: 2rem 1rem;
-      font: 1rem/1.55 system-ui, sans-serif;
-      color: #1f2a37;
-      background: linear-gradient(135deg, #e4e9ef 0%, #bcc7d3 50%, #dfe5eb 100%);
-      background-attachment: fixed;
-    }
-    .page { max-width: 44rem; margin: 0 auto; }
-    header {
-      padding: 2rem 1.5rem;
-      color: #fff;
-      background: linear-gradient(135deg, #1b3a57, #2f6390);
-      border-radius: 12px 12px 0 0;
-      border-bottom: 4px solid #e08a1e;
-    }
-    header { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; }
-    .logo { display: block; flex: none; width: 107px; height: 87px; padding: 0.4rem; box-sizing: content-box; background: #fff; border-radius: 8px; }
-    h1 { margin: 0; font-size: 2rem; }
-    header p { margin: 0.25rem 0 0; color: #d5e1ec; }
-    main {
-      padding: 1.5rem;
-      background: #fff;
-      border-radius: 0 0 12px 12px;
-      box-shadow: 0 8px 24px rgba(27, 58, 87, 0.2);
-    }
-    .notice {
-      padding: 0.75rem 1rem;
-      margin-bottom: 1rem;
-      text-align: center;
-      font-weight: 600;
-      color: #6b3f06;
-      background: #fdf0dc;
-      border: 1px solid #e08a1e;
-      border-radius: 8px;
-    }
-    .notice p { margin: 0; }
-    [hidden] { display: none; }
-    .countdown { display: flex; justify-content: center; gap: 0.5rem; margin-top: 0.6rem; }
-    .countdown div {
-      min-width: 4rem;
-      padding: 0.35rem 0.25rem;
-      font-size: 0.75rem;
+    /* Fonts are self-hosted so that no visitor data goes to a third party. */
+    @font-face {
+      font-family: "Barlow";
       font-weight: 400;
-      background: #fff;
-      border: 1px solid #e08a1e;
+      font-display: swap;
+      src: url("fonts/barlow-latin-400-normal.woff2") format("woff2");
+      unicode-range: U+0000-00FF, U+2000-206F;
+    }
+    @font-face {
+      font-family: "Barlow";
+      font-weight: 400;
+      font-display: swap;
+      src: url("fonts/barlow-latin-ext-400-normal.woff2") format("woff2");
+      unicode-range: U+0100-024F;
+    }
+    @font-face {
+      font-family: "Barlow";
+      font-weight: 600;
+      font-display: swap;
+      src: url("fonts/barlow-latin-600-normal.woff2") format("woff2");
+      unicode-range: U+0000-00FF, U+2000-206F;
+    }
+    @font-face {
+      font-family: "Barlow";
+      font-weight: 600;
+      font-display: swap;
+      src: url("fonts/barlow-latin-ext-600-normal.woff2") format("woff2");
+      unicode-range: U+0100-024F;
+    }
+
+    :root {
+      --navy: #0c1c5c;
+      --ink: #101a38;
+      --steel: #c6ccd2;
+      --etch: rgba(16, 26, 56, 0.5);
+      --catch-light: rgba(255, 255, 255, 0.55);
+      --red: #a80d24;
+      --gutter: clamp(1.25rem, 4vw, 2.5rem);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: clamp(1rem, 4vw, 3rem);
+      font: 400 1.0625rem/1.5 "Barlow", "Helvetica Neue", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--navy);
+    }
+
+    h1, h2, p { margin: 0; }
+
+    a { color: inherit; text-underline-offset: 0.15em; }
+    a:hover { color: var(--red); }
+    a:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+
+    /* The page is a stainless steel rating plate. */
+    .plate {
+      position: relative;
+      width: 100%;
+      max-width: 56rem;
+      padding: var(--gutter);
       border-radius: 6px;
+      background-color: var(--steel);
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1400' height='700'%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.004 1.2' numOctaves='3' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .34 0 0 0 -.11'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23b)'/%3E%3C/svg%3E"),
+        linear-gradient(105deg, #b9c0c7 0%, #e3e6e9 26%, #c0c6cd 50%, #e6e9eb 72%, #bcc2c9 100%);
+      background-size: 1400px 700px, auto;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        inset 0 -1px 0 rgba(16, 26, 56, 0.35),
+        0 1.5rem 3rem rgba(2, 6, 28, 0.55);
     }
-    .countdown b {
-      display: block;
-      font-size: 1.4rem;
-      line-height: 1.2;
-      font-variant-numeric: tabular-nums;
+
+    .screw {
+      position: absolute;
+      width: 0.875rem;
+      height: 0.875rem;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #f1f3f5, #868e97 75%);
+      box-shadow: 0 1px 1px rgba(2, 6, 28, 0.6), 0 0 0 1px rgba(16, 26, 56, 0.35);
     }
-    h2 { margin: 0 0 0.5rem; font-size: 1.1rem; color: #1b3a57; }
-    p { margin: 0.4rem 0; }
-    a { color: #1f5f96; }
-    .card {
-      padding: 1rem 1.25rem;
-      margin-bottom: 1rem;
-      background: #f6f8fa;
-      border: 1px solid #cfd8e1;
-      border-left: 4px solid #2f6390;
-      border-radius: 8px;
+    .screw::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 10%;
+      width: 80%;
+      height: 2px;
+      margin-top: -1px;
+      background: #3b424d;
+      transform: rotate(var(--turn));
     }
-    .people { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1rem; }
-    .people .card { margin-bottom: 0; overflow-wrap: anywhere; }
-    .role { color: #55657a; font-size: 0.9rem; }
-    footer {
-      margin-top: 1.5rem;
-      padding-top: 1rem;
-      border-top: 1px solid #cfd8e1;
-      font-size: 0.875rem;
-      color: #55657a;
+    .screw:nth-of-type(1) { top: 0.5rem; left: 0.5rem; --turn: 28deg; }
+    .screw:nth-of-type(2) { top: 0.5rem; right: 0.5rem; --turn: -62deg; }
+    .screw:nth-of-type(3) { bottom: 0.5rem; left: 0.5rem; --turn: 74deg; }
+    .screw:nth-of-type(4) { bottom: 0.5rem; right: 0.5rem; --turn: -15deg; }
+
+    .maker {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem 1.5rem;
+    }
+    .maker img { display: block; flex: none; }
+    h1 {
+      font-size: clamp(1.625rem, 4.5vw, 2.25rem);
+      font-weight: 600;
+      line-height: 1.15;
+    }
+
+    .status { margin-top: clamp(1.5rem, 4vw, 2.5rem); }
+    .status p { font-size: 1.25rem; font-weight: 600; }
+
+    .fields {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      margin-top: clamp(1.5rem, 4vw, 2.25rem);
+    }
+    .field {
+      grid-column: span 2;
+      min-width: 0;
+      padding: 0.75rem 1rem 0.875rem 0;
+      overflow-wrap: anywhere;
+      border-top: 1px solid var(--etch);
+      box-shadow: inset 0 1px 0 var(--catch-light);
+    }
+    .field.wide { grid-column: span 3; }
+    .field h2 { font-size: 0.9375rem; font-weight: 400; }
+    .field p { font-size: 1.125rem; }
+    .field .name { font-weight: 600; }
+
+    @media (max-width: 40rem) {
+      .fields { grid-template-columns: 1fr; }
+      .field, .field.wide { grid-column: auto; padding-right: 0; }
+    }
+
+    @page { size: A4 landscape; margin: 0; }
+    @media print {
+      html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      body { min-height: 208mm; padding: 0 1.5rem; }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <header>
-      <img class="logo" src="logo.png" alt="SSR Inox Metal Logo" width="107" height="87">
-      <div>
-        <h1>Inox Metal SSR</h1>
-        <p>Inox Metal SSR s.r.l.</p>
-      </div>
+  <main class="plate">
+    <i class="screw" aria-hidden="true"></i>
+    <i class="screw" aria-hidden="true"></i>
+    <i class="screw" aria-hidden="true"></i>
+    <i class="screw" aria-hidden="true"></i>
+
+    <header class="maker">
+      <img src="logo.png" alt="SSR Inox Metal Logo" width="107" height="87">
+      <h1>Inox Metal SSR s.r.l.</h1>
     </header>
 
-    <main>
-      <div class="notice">
-        <p>Diese Website befindet sich im Aufbau.</p>
-        <div id="countdown" class="countdown" hidden>
-          <div><b id="cd-days">0</b>Tage</div>
-          <div><b id="cd-hours">00</b>Stunden</div>
-          <div><b id="cd-minutes">00</b>Minuten</div>
-          <div><b id="cd-seconds">00</b>Sekunden</div>
-        </div>
-      </div>
+    <section class="status">
+      <p>Diese Website befindet sich im Aufbau.</p>
+    </section>
 
-      <section class="card">
-        <h2>Kontakt</h2>
+    <section class="fields" aria-label="Kontakt">
+      <div class="field">
+        <h2>Anschrift</h2>
         <p>Str. Căprioarei, nr. 9<br>Ghiroda, Timiș, Rumänien</p>
-        <p>Telefon: <a href="tel:+40761133635">+40 761 133 635</a></p>
-        <p>E-Mail: <a href="mailto:office@inoxmetalssr.ro">office@inoxmetalssr.ro</a></p>
-      </section>
-
-      <div class="people">
-        <section class="card">
-          <h2>Bogdan Daniel</h2>
-          <p class="role">General Manager</p>
-          <p><a href="tel:+40770600838">+40 770 600 838</a></p>
-          <p><a href="mailto:daniel.bogdan@inoxmetalssr.ro">daniel.bogdan@inoxmetalssr.ro</a></p>
-        </section>
-        <section class="card">
-          <h2>Andronache Diane</h2>
-          <p class="role">Sales Engineering</p>
-          <p><a href="tel:+40761133635">+40 761 133 635</a></p>
-          <p><a href="mailto:diana@inoxmetalssr.ro">diana@inoxmetalssr.ro</a></p>
-        </section>
+      </div>
+      <div class="field">
+        <h2>Telefon</h2>
+        <p><a href="tel:+40761133635">+40 761 133 635</a></p>
+      </div>
+      <div class="field">
+        <h2>E-Mail</h2>
+        <p><a href="mailto:office@inoxmetalssr.ro">office@inoxmetalssr.ro</a></p>
       </div>
 
-      <footer>
-        <p>Handelsregister: J35/432/2013 · USt-IdNr./CIF: RO31249380</p>
-        <p><a href="https://www.facebook.com/SSR-Inox-Metal-897661736983390/">Facebook</a> · <a href="https://www.inoxmetalssr.ro/">inoxmetalssr.ro</a></p>
-      </footer>
-    </main>
-  </div>
+      <div class="field wide">
+        <h2>General Manager</h2>
+        <p class="name">Bogdan Daniel</p>
+        <p><a href="tel:+40770600838">+40 770 600 838</a></p>
+        <p><a href="mailto:daniel.bogdan@inoxmetalssr.ro">daniel.bogdan@inoxmetalssr.ro</a></p>
+      </div>
+      <div class="field wide">
+        <h2>Sales Engineering</h2>
+        <p class="name">Andronache Diane</p>
+        <p><a href="tel:+40761133635">+40 761 133 635</a></p>
+        <p><a href="mailto:diana@inoxmetalssr.ro">diana@inoxmetalssr.ro</a></p>
+      </div>
 
-  <script>
-    // Fixed end date, so every visitor sees the same countdown.
-    const end = new Date('2026-11-12T00:00:00+01:00').getTime();
-    const box = document.getElementById('countdown');
-    const set = (id, value) => { document.getElementById(id).textContent = value; };
-    const pad = (n) => String(n).padStart(2, '0');
-
-    function tick() {
-      const left = Math.floor((end - Date.now()) / 1000);
-      if (left <= 0) {
-        box.hidden = true;
-        clearInterval(timer);
-        return;
-      }
-      box.hidden = false;
-      set('cd-days', Math.floor(left / 86400));
-      set('cd-hours', pad(Math.floor(left / 3600) % 24));
-      set('cd-minutes', pad(Math.floor(left / 60) % 60));
-      set('cd-seconds', pad(left % 60));
-    }
-
-    const timer = setInterval(tick, 1000);
-    tick();
-  </script>
+      <div class="field">
+        <h2>Handelsregister</h2>
+        <p>J35/432/2013</p>
+      </div>
+      <div class="field">
+        <h2>USt-IdNr./CIF</h2>
+        <p>RO31249380</p>
+      </div>
+      <div class="field">
+        <h2>Online</h2>
+        <p><a href="https://www.inoxmetalssr.ro/">inoxmetalssr.ro</a></p>
+        <p><a href="https://www.facebook.com/SSR-Inox-Metal-897661736983390/">Facebook</a></p>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
