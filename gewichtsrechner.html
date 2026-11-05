@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gewichtsrechner – Inox Metal SSR</title>
+  <meta name="description" content="Gewicht von Blechen aus Edelstahl, Stahl, Aluminium und Titan berechnen.">
+  <meta name="theme-color" content="#0c1c5c">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="plate">
+    <i class="screw" aria-hidden="true"></i>
+    <i class="screw" aria-hidden="true"></i>
+    <i class="screw" aria-hidden="true"></i>
+    <i class="screw" aria-hidden="true"></i>
+
+    <header class="maker">
+      <a href="index.html"><img src="logo.png" alt="Zur Kontaktseite" width="107" height="87"></a>
+      <h1>Gewichtsrechner</h1>
+    </header>
+
+    <section class="status">
+      <p>Gewicht von Blechen berechnen</p>
+      <a class="button quiet" href="index.html">Zurück zum Kontakt</a>
+    </section>
+
+    <form id="calculator" class="form calculator">
+      <label>Länge (mm)
+        <input id="length" type="number" min="0.001" step="any" inputmode="decimal" required>
+      </label>
+      <label>Breite (mm)
+        <input id="width" type="number" min="0.001" step="any" inputmode="decimal" required>
+      </label>
+      <label>Dicke (mm)
+        <input id="thickness" type="number" min="0.001" step="any" inputmode="decimal" required>
+      </label>
+      <label>Stückzahl
+        <input id="quantity" type="number" min="1" step="1" inputmode="numeric" value="1" required>
+      </label>
+      <label>Material
+        <select id="material">
+          <option value="7930">Edelstahl (7.930 kg/m³)</option>
+          <option value="7850">Stahl (7.850 kg/m³)</option>
+          <option value="2750">Aluminium (2.750 kg/m³)</option>
+          <option value="4540">Titan (4.540 kg/m³)</option>
+        </select>
+      </label>
+
+      <div class="actions">
+        <button class="button" type="submit">Berechnen</button>
+        <button class="button quiet" type="reset">Felder leeren</button>
+        <button id="copy" class="button quiet" type="button" hidden>Kopieren</button>
+      </div>
+
+      <div class="result" aria-live="polite">
+        <div id="result" hidden>
+          <p id="total" class="result-total"></p>
+          <p id="each"></p>
+        </div>
+      </div>
+
+      <p class="hint">Das Ergebnis ist ein theoretischer Richtwert. Das tatsächliche Gewicht kann abweichen.</p>
+    </form>
+  </main>
+
+  <script>
+    const form = document.getElementById('calculator');
+    const result = document.getElementById('result');
+    const copyButton = document.getElementById('copy');
+    const field = (id) => document.getElementById(id);
+    const kilograms = new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 3 });
+    const plain = new Intl.NumberFormat('de-DE', { maximumFractionDigits: 3 });
+
+    let summary = '';
+
+    function clearResult() {
+      result.hidden = true;
+      copyButton.hidden = true;
+      copyButton.textContent = 'Kopieren';
+    }
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const length = field('length').valueAsNumber;
+      const width = field('width').valueAsNumber;
+      const thickness = field('thickness').valueAsNumber;
+      const quantity = field('quantity').valueAsNumber;
+      const material = field('material');
+      const density = Number(material.value);
+
+      // Millimetres cubed times kg/m³; 1 m³ is 10⁹ mm³.
+      const each = (length * width * thickness * density) / 1e9;
+      const total = each * quantity;
+
+      field('total').textContent = `${kilograms.format(total)} kg`;
+      field('each').textContent = `${kilograms.format(each)} kg pro Stück`;
+
+      const name = material.selectedOptions[0].textContent.split(' (')[0];
+      const size = [length, width, thickness].map((n) => plain.format(n)).join(' × ');
+      summary = `${name}, ${size} mm, ${plain.format(quantity)} Stück: ${kilograms.format(total)} kg`;
+
+      result.hidden = false;
+      copyButton.hidden = false;
+      copyButton.textContent = 'Kopieren';
+    });
+
+    // A shown result must always match the fields above it.
+    form.addEventListener('input', clearResult);
+    form.addEventListener('reset', clearResult);
+
+    copyButton.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(summary);
+        copyButton.textContent = 'Kopiert';
+      } catch {
+        copyButton.textContent = 'Kopieren nicht möglich';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -6,154 +6,7 @@
   <title>Inox Metal SSR – Kontakt</title>
   <meta name="description" content="Kontaktdaten der Inox Metal SSR s.r.l., Ghiroda, Timiș, Rumänien.">
   <meta name="theme-color" content="#0c1c5c">
-  <style>
-    /* Fonts are self-hosted so that no visitor data goes to a third party. */
-    @font-face {
-      font-family: "Barlow";
-      font-weight: 400;
-      font-display: swap;
-      src: url("fonts/barlow-latin-400-normal.woff2") format("woff2");
-      unicode-range: U+0000-00FF, U+2000-206F;
-    }
-    @font-face {
-      font-family: "Barlow";
-      font-weight: 400;
-      font-display: swap;
-      src: url("fonts/barlow-latin-ext-400-normal.woff2") format("woff2");
-      unicode-range: U+0100-024F;
-    }
-    @font-face {
-      font-family: "Barlow";
-      font-weight: 600;
-      font-display: swap;
-      src: url("fonts/barlow-latin-600-normal.woff2") format("woff2");
-      unicode-range: U+0000-00FF, U+2000-206F;
-    }
-    @font-face {
-      font-family: "Barlow";
-      font-weight: 600;
-      font-display: swap;
-      src: url("fonts/barlow-latin-ext-600-normal.woff2") format("woff2");
-      unicode-range: U+0100-024F;
-    }
-
-    :root {
-      --navy: #0c1c5c;
-      --ink: #101a38;
-      --steel: #c6ccd2;
-      --etch: rgba(16, 26, 56, 0.5);
-      --catch-light: rgba(255, 255, 255, 0.55);
-      --red: #a80d24;
-      --gutter: clamp(1.25rem, 4vw, 2.5rem);
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      margin: 0;
-      padding: clamp(1rem, 4vw, 3rem);
-      font: 400 1.0625rem/1.5 "Barlow", "Helvetica Neue", Arial, sans-serif;
-      color: var(--ink);
-      background: var(--navy);
-    }
-
-    h1, h2, p { margin: 0; }
-
-    a { color: inherit; text-underline-offset: 0.15em; }
-    a:hover { color: var(--red); }
-    a:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
-
-    /* The page is a stainless steel rating plate. */
-    .plate {
-      position: relative;
-      width: 100%;
-      max-width: 56rem;
-      padding: var(--gutter);
-      border-radius: 6px;
-      background-color: var(--steel);
-      background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1400' height='700'%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.004 1.2' numOctaves='3' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .34 0 0 0 -.11'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23b)'/%3E%3C/svg%3E"),
-        linear-gradient(105deg, #b9c0c7 0%, #e3e6e9 26%, #c0c6cd 50%, #e6e9eb 72%, #bcc2c9 100%);
-      background-size: 1400px 700px, auto;
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.8),
-        inset 0 -1px 0 rgba(16, 26, 56, 0.35),
-        0 1.5rem 3rem rgba(2, 6, 28, 0.55);
-    }
-
-    .screw {
-      position: absolute;
-      width: 0.875rem;
-      height: 0.875rem;
-      border-radius: 50%;
-      background: radial-gradient(circle at 35% 30%, #f1f3f5, #868e97 75%);
-      box-shadow: 0 1px 1px rgba(2, 6, 28, 0.6), 0 0 0 1px rgba(16, 26, 56, 0.35);
-    }
-    .screw::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 10%;
-      width: 80%;
-      height: 2px;
-      margin-top: -1px;
-      background: #3b424d;
-      transform: rotate(var(--turn));
-    }
-    .screw:nth-of-type(1) { top: 0.5rem; left: 0.5rem; --turn: 28deg; }
-    .screw:nth-of-type(2) { top: 0.5rem; right: 0.5rem; --turn: -62deg; }
-    .screw:nth-of-type(3) { bottom: 0.5rem; left: 0.5rem; --turn: 74deg; }
-    .screw:nth-of-type(4) { bottom: 0.5rem; right: 0.5rem; --turn: -15deg; }
-
-    .maker {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.75rem 1.5rem;
-    }
-    .maker img { display: block; flex: none; }
-    h1 {
-      font-size: clamp(1.625rem, 4.5vw, 2.25rem);
-      font-weight: 600;
-      line-height: 1.15;
-    }
-
-    .status { margin-top: clamp(1.5rem, 4vw, 2.5rem); }
-    .status p { font-size: 1.25rem; font-weight: 600; }
-
-    .fields {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      margin-top: clamp(1.5rem, 4vw, 2.25rem);
-    }
-    .field {
-      grid-column: span 2;
-      min-width: 0;
-      padding: 0.75rem 1rem 0.875rem 0;
-      overflow-wrap: anywhere;
-      border-top: 1px solid var(--etch);
-      box-shadow: inset 0 1px 0 var(--catch-light);
-    }
-    .field.wide { grid-column: span 3; }
-    .field h2 { font-size: 0.9375rem; font-weight: 400; }
-    .field p { font-size: 1.125rem; }
-    .field .name { font-weight: 600; }
-
-    @media (max-width: 40rem) {
-      .fields { grid-template-columns: 1fr; }
-      .field, .field.wide { grid-column: auto; padding-right: 0; }
-    }
-
-    @page { size: A4 landscape; margin: 0; }
-    @media print {
-      html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      body { min-height: 208mm; padding: 0 1.5rem; }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="plate">
@@ -169,6 +22,7 @@
 
     <section class="status">
       <p>Diese Website befindet sich im Aufbau.</p>
+      <a class="button no-print" href="gewichtsrechner.html">Gewichtsrechner</a>
     </section>
 
     <section class="fields" aria-label="Kontakt">
@@ -212,6 +66,37 @@
         <p><a href="https://www.facebook.com/SSR-Inox-Metal-897661736983390/">Facebook</a></p>
       </div>
     </section>
+
+    <!-- Not connected yet. The inputs have no name attribute on purpose:
+         without JavaScript the browser still submits nothing. -->
+    <form id="inquiry" class="form no-print">
+      <h2>Kontaktformular</h2>
+      <label>Name
+        <input type="text" autocomplete="name" required>
+      </label>
+      <label>Telefonnummer
+        <input type="tel" autocomplete="tel" required>
+      </label>
+      <label>E-Mail-Adresse
+        <input type="email" autocomplete="email" required>
+      </label>
+      <div class="actions">
+        <button class="button" type="submit">Absenden</button>
+      </div>
+      <p id="inquiry-note" class="note" role="status" hidden>
+        Das Formular ist noch nicht aktiv, Ihre Angaben wurden nicht gesendet.
+        Bitte schreiben Sie an <a href="mailto:office@inoxmetalssr.ro">office@inoxmetalssr.ro</a>
+        oder rufen Sie <a href="tel:+40761133635">+40 761 133 635</a> an.
+      </p>
+    </form>
   </main>
+
+  <script>
+    // The form stays on the page: nothing is stored or sent anywhere yet.
+    document.getElementById('inquiry').addEventListener('submit', (event) => {
+      event.preventDefault();
+      document.getElementById('inquiry-note').hidden = false;
+    });
+  </script>
 </body>
 </html>
